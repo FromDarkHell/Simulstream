@@ -4,10 +4,27 @@
 	overflow-y: hidden; /* Hide vertical scrollbar */
 }
 
-body {
+html, body {
 	background-color: #1f1f23;
 	margin: 0;
-	display: flex;
-	flex-wrap: wrap;
+	height: 100%;
 }
 
+/* Player Styling */
+#players {
+	height: 50%;
+}
+
+.player {
+	height: 100%;
+}
+
+/* Chat Styling */
+#chats {
+	height: 50%;
+	width: 100%;
+}
+
+.chat {
+	height: 100%;
+}

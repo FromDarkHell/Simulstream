@@ -13,22 +13,15 @@ function CalculateScreenPercentages(queryStr) {
 function InitializeTwitchEmbeds(twitchChannel, queryStr) {
 	var videoFrame = document.createElement('iframe');
 	videoFrame.src = "https://player.twitch.tv/?channel=" + twitchChannel + "&parent=fromdarkhell.github.io&parent=simulstream.test&muted=true"
-	videoFrame.className = "twitchPlayer"
-	videoFrame.setAttribute('allowFullScreen', '')
-
 
 	var chatFrame = document.createElement('iframe')
 	chatFrame.src = "https://www.twitch.tv/embed/" + twitchChannel + "/chat?darkpopout&parent=fromdarkhell.github.io&parent=simulstream.test"
-	chatFrame.className = "twitchChat"
-
 	chatFrame.frameBorder = videoFrame.frameBorder = "0";
 
-	videoFrame.style.width = CalculateScreenPercentages(queryStr)
-	videoFrame.style.height = (pageHeight / 2) + "px";
-
-	chatFrame.style.height = (pageHeight / 2) + "px";
-
-	chatFrame.style.width = CalculateScreenPercentages(queryStr);
+	videoFrame.setAttribute('allowFullScreen', '')
+	videoFrame.style.width = chatFrame.style.width = CalculateScreenPercentages(queryStr)
+	videoFrame.classList.add('twPlayer', 'player')
+	chatFrame.classList.add('twChat', 'chat')
 
 	return [videoFrame, chatFrame]
 }
@@ -40,17 +33,13 @@ function InitializeYoutubeEmbeds(ytID, queryStr) {
 	videoFrame.setAttribute('allowFullScreen', '')
 
 	var chatFrame = document.createElement('iframe');
-	// If you're testing on the `simulstream.test` domain use that, if not use `fromdarkhell.github.io`
-	embedDomain = "simulstream.test"
-	embedDomain = "fromdarkhell.github.io"
-
-	chatFrame.src = "https://www.youtube.com/live_chat?v=" + ytID + "&embed_domain=" + embedDomain
+	chatFrame.src = "https://www.youtube.com/live_chat?v=" + ytID + "&embed_domain=fromdarkhell.github.io"
 	chatFrame.frameBorder = videoFrame.frameBorder = "0";
 
 	videoFrame.style.width = CalculateScreenPercentages(queryStr)
-	videoFrame.style.height = (pageHeight / 2) + "px";
-	chatFrame.style.height = (pageHeight / 2) + "px";
-	chatFrame.style.width = CalculateScreenPercentages(queryStr);
+	chatFrame.style.width = CalculateScreenPercentages(queryStr)
+	chatFrame.classList.add('ytChat', 'chat')
+	videoFrame.classList.add('ytPlayer', 'player')
 
 	return [videoFrame, chatFrame]
 }
