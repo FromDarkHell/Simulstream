@@ -14,7 +14,7 @@ function InitializeTwitchEmbeds(twitchChannel, queryStr) {
 	var videoFrame = document.createElement('iframe');
 	videoFrame.src = "https://player.twitch.tv/?channel=" + twitchChannel + "&parent=fromdarkhell.github.io&parent=simulstream.test&muted=true"
 	videoFrame.className = "twitchPlayer"
-	videoFrame.allowfullscreen = true;
+	videoFrame.setAttribute('allowFullScreen', '')
 
 
 	var chatFrame = document.createElement('iframe')
