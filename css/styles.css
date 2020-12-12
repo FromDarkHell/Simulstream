@@ -1,0 +1,13 @@
+/* Base Styles */
+
+* {
+	overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
+body {
+	background-color: #1f1f23;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
