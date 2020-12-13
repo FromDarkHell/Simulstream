@@ -1,87 +1,75 @@
-function CalculateScreenPercentages(queryStr) {
-	screenSplit = 0;
-	if (queryStr.has('yt')) {
-		screenSplit += (queryStr.get("yt").split(",").length)
+CurrentStreams = null
+
+// https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+function IsValidURL(string) {
+	let url;
+
+	try {
+		url = new URL(string);
+	} catch (_) {
+		return false;
 	}
-	if (queryStr.has('tw')) {
-		screenSplit += (queryStr.get("tw").split(",").length)
+
+	return url.protocol === "http:" || url.protocol === "https:";
+}
+
+
+function UpdateStreamsList() {
+	if (CurrentStreams !== null) {
+		$("#StreamText")[0].textContent = CurrentStreams.join(', ')
+	} else {
+		$("#StreamText")[0].textContent = 'None'
 	}
-
-	return ((1 / screenSplit * 100)) + "%"
 }
 
-function InitializeTwitchEmbeds(twitchChannel, queryStr) {
-	var videoFrame = document.createElement('iframe');
-	videoFrame.src = "https://player.twitch.tv/?channel=" + twitchChannel + "&parent=fromdarkhell.github.io&parent=simulstream.test&muted=true"
+function AddStream() {
+	if (CurrentStreams === null) CurrentStreams = []
 
-	var chatFrame = document.createElement('iframe')
-	chatFrame.src = "https://www.twitch.tv/embed/" + twitchChannel + "/chat?darkpopout&parent=fromdarkhell.github.io&parent=simulstream.test"
-	chatFrame.frameBorder = videoFrame.frameBorder = "0";
+	streamLink = $("#twitch-input")[0].value
+	console.log("Adding stream: " + streamLink)
 
-	videoFrame.setAttribute('allowFullScreen', '')
-	videoFrame.style.width = chatFrame.style.width = CalculateScreenPercentages(queryStr)
-	videoFrame.classList.add('twPlayer', 'player')
-	chatFrame.classList.add('twChat', 'chat')
+	displayName = streamLink
+	if (IsValidURL(streamLink)) {
+		console.log("User entered URL...");
+		let url = new URL(streamLink)
 
-	return [videoFrame, chatFrame]
-}
-
-function InitializeYoutubeEmbeds(ytID, queryStr) {
-	var videoFrame = document.createElement('iframe');
-	videoFrame.src = "https://www.youtube.com/embed/" + ytID
-	videoFrame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-	videoFrame.setAttribute('allowFullScreen', '')
-
-	var chatFrame = document.createElement('iframe');
-	chatFrame.src = "https://www.youtube.com/live_chat?v=" + ytID + "&embed_domain=fromdarkhell.github.io"
-	chatFrame.frameBorder = videoFrame.frameBorder = "0";
-
-	videoFrame.style.width = CalculateScreenPercentages(queryStr)
-	chatFrame.style.width = CalculateScreenPercentages(queryStr)
-	chatFrame.classList.add('ytChat', 'chat')
-	videoFrame.classList.add('ytPlayer', 'player')
-
-	return [videoFrame, chatFrame]
-}
-
-function ParseChannelOptions() {
-	const queryStr = new URLSearchParams(window.location.search);
-	console.log("Parsing channel options: " + window.location.search)
-	splitPercentage = CalculateScreenPercentages(queryStr);
-	console.log("Screen divided by: " + splitPercentage)
-
-	if (queryStr.has('tw')) { // If we have a (set) of twitch channels in the list
-		twitchChannels = queryStr.get("tw").split(",")
-		console.log("Twitch Channels: " + twitchChannels)
-		for (var i = 0; i < twitchChannels.length; i++) {
-			twitchChannel = twitchChannels[i];
-			console.log("Adding embed for: " + twitchChannel)
-
-			const [videoFrame, chatFrame] = InitializeTwitchEmbeds(twitchChannel, queryStr)
-
-			document.getElementById('players').appendChild(videoFrame)
-			document.getElementById('chats').appendChild(chatFrame)
+		// Handle twitch URLs first since they're the easiest to do
+		if (url.hostname === 'www.twitch.tv') {
+			displayName = url.pathname.substring(1) + "(tw)"
+		} else if (url.hostname === 'www.youtube.com') {
+			if (!url.searchParams.has('v')) {
+				alert('Invalid Youtube Link...');
+				return;
+			}
+			displayName = url.searchParams.get('v') + " (yt)"
+		} else {
+			// Some sort of unknown link that we can't even handle in the first place
+			return;
 		}
+	} else {
+		// They must've entered a name or a youtube ID directly
+		displayName = streamLink + " (tw)"
 	}
 
-
-	if (queryStr.has('yt')) {
-		youtubeStreams = queryStr.get("yt").split(",")
-		for (var i = 0; i < youtubeStreams.length; i++) {
-			ytID = youtubeStreams[i];
-			console.log("Adding Youtube embed for: " + ytID)
-
-			const [videoFrame, chatFrame] = InitializeYoutubeEmbeds(ytID, queryStr)
-
-			document.getElementById('players').appendChild(videoFrame)
-			document.getElementById('chats').appendChild(chatFrame)
-		}
-	}
-
-	document.getElementById('players').style.width = document.getElementById('chats').style.width = "100%"
+	CurrentStreams.push(displayName)
+	UpdateStreamsList()
 }
 
-window.onload = function() {
-	pageHeight = Math.max($(document).height(), $(window).height())
-	ParseChannelOptions();
+function ClearStreams() {
+	CurrentStreams = null;
+	UpdateStreamsList()
+}
+
+function WatchStreams() {
+	var urlParams = new URLSearchParams();
+
+	for (var i = 0; i < CurrentStreams.length; i++) {
+		stream = CurrentStreams[i].substring(0, CurrentStreams[i].length - 5)
+		platform = CurrentStreams[i].substring(CurrentStreams[i].length - 3, CurrentStreams[i].length - 1)
+
+		console.log("Adding search param for: " + stream + " on: " + platform)
+		urlParams.append(platform, stream)
+	}
+
+	window.location.href = 'live?' + urlParams.toString()
 }

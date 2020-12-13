@@ -1,0 +1,115 @@
+/* Base Styles */
+
+* {
+	color: rgb(240, 148, 132);
+	font-family: 'JetBrains Mono', monospace;
+	box-sizing: border-box;
+}
+
+h1 {
+	text-align: center;
+	vertical-align: baseline;
+	border-spacing: 5px;
+	border-bottom: 3px dashed #84E0F0;
+
+	padding-bottom: 15px;
+}
+
+#column1 {
+	position: relative;
+	top: 5%;
+}
+
+
+/* Input Boxes */
+input {
+	color: rgb(0,0,0);
+
+	border-radius: 25px;
+	background: #ffffff;
+	padding: 5px;
+	text-align: center;
+}
+
+
+/*
+
+#twitch-input {
+	position: relative;
+	left: 5%;
+	margin-right: 5px;
+	width: 40%;
+}
+
+#yt-input {
+	position: relative;
+	left: 15%;
+	width: 40%;
+}
+*/
+
+#twitch-input {
+	position: relative;
+	margin-right: 5px;
+	width: 45%;
+	left: calc(44% - 15%);
+}
+
+/* Navigate Buttons */
+#add-button {
+	position: relative;
+
+	color: rgb(255,255,255);
+	background: rgb(102, 102, 255);
+	border-radius: 25px;
+	padding: 5px;
+
+	left: calc(44% - 1%);
+	margin-top: 4vh;
+	width: 15%;
+
+	text-decoration: underline;
+}
+
+
+#clear-button {
+	position: relative;
+
+	color: rgb(255,255,255);
+	background: rgb(0, 102, 255);
+	border-radius: 25px;
+	padding: 5px;
+
+	left: calc(44% - 2%);
+	margin-top: 3vh;
+	width: 17%;
+
+	text-decoration: underline;
+	text-underline-position: under;
+}
+
+#watch-button {
+	position: relative;
+
+	color: rgb(255,255,255);
+	background: rgba(240, 229, 132, 0.75);
+	border-radius: 25px;
+	padding: 5px;
+
+	left: calc(44% - 3.25%);
+	margin-top: 3vh;
+	width: 20%;
+
+	text-decoration: underline;
+}
+
+
+/* Footer */
+#footer {
+	position: fixed;
+	left: 67%;
+	bottom: -10px;
+	color: white;
+	text-align: right;
+	font-size: 12pt;
+}

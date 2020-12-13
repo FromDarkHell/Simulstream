@@ -9,7 +9,12 @@
 
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+	
 	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="./css/main.css">
 	<script src="./js/main.js"></script>
 	
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -22,12 +27,39 @@
 
 
 <body>
-	<div id="players">
+	<h1>Simulstream</h1>
+	
+	<div id="column1">
+		<span id="twitchSpan">
+			<input id="twitch-input" placeholder="Enter Youtube Stream Link or Twitch Link/Channel Name">
+		</span id="ytSpan">
+		
 	</div>
 	
-	<div id="chats">
+	<div id="bottom">
+		<br>
+		<br>
+		<br>
+		<div style="text-align: center">
+			Streams:
+			<p id="StreamText">None</p>
+		</div>
+		
+		<button id="add-button" type="button" onclick="AddStream()">Add Stream</button>
+		<br>
+		<button id="clear-button" type="button" onclick="ClearStreams()">Clear Stream List</button>
+		<br>
+		
+		<!-- TODO: Disable this button while Streams are cleared -->
+		<button id="watch-button" type="button" onclick="WatchStreams()">Watch Streams</button>
 	</div>
 	
+	<footer id="footer">
+		<p>
+			Created By: <a href="https://github.com/FromDarkHell">FromDarkHell</a>
+			Hosted On: <a href="https://github.com/FromDarkHel/Simulstream">Github</a>
+		</p>
+	</footer>
 </body>
 
 
