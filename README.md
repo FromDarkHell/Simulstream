@@ -1,4 +1,4 @@
-## [Simulstream](fromdarkhell.github.io/Simulstream)
+## [Simulstream](https://fromdarkhell.github.io/Simulstream/)
 A web page meant to be able to play multiple streams at once from multiple different streaming/content platforms
 
 Right now it supports: 
