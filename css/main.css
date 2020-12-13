@@ -95,13 +95,16 @@ button[disabled=disabled], button:disabled {
   text-decoration: line-through !important;
 }
 
+input[type=checkbox] {
+	border-radius: 25px;
+}
+
 #layout-div {
 	margin-top: 2.5vh;
 
 	text-align: center;
 	text-decoration: underline;
 }
-
 
 #switch-span {
 	display: inline-block;

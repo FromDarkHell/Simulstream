@@ -29,7 +29,7 @@
 <body>
 	<h1>Simulstream</h1>
 	
-	<div id="column1">
+	<div id="column1" title="Enter a stream/video link">
 		<span id="twitchSpan">
 			<input id="twitch-input" placeholder="Enter Youtube Stream Link or Twitch Link/Channel Name">
 		</span id="ytSpan">
@@ -45,26 +45,27 @@
 			<p id="StreamText">None</p>
 		</div>
 		
-		<button id="add-button" type="button" onclick="AddStream()">Add Stream</button>
+		<button id="add-button" type="button" onclick="AddStream()" title="Adds a stream to the list of multi streams">Add Stream</button>
 		
 		<br>
-		<button id="clear-button" type="button" onclick="ClearStreams()">Clear Stream List</button>
+		<button id="clear-button" type="button" onclick="ClearStreams()" title="Clears the list of streams to watch">Clear Stream List</button>
 		<br>
 		
-		<button id="watch-button" type="button" onclick="WatchStreams()">Watch Streams</button>
+		<button id="watch-button" type="button" onclick="WatchStreams()" title="Opens the multi stream link">Watch Streams</button>
 		<br>
 		
 		<div id="layout-div">
 			Layout Options
 		</div>
 		
-		<span id="switch-span" title="Switches the location of the stream & chat">
+		<span id="switch-span" title="Switches the location of the stream & chat" class="container">
 			<input type="checkbox" id="switch-box">
 			<label>Switch Streams and Chat</label>
 		</span>
+		
 		<br>
 		<span id="align-span" title="Default: Stream on left, chat on right">
-			<input type="checkbox" id="align-box">
+			<input type="checkbox" id="horizontal-box">
 			<label>Horizontal Layout</label>
 		</span>
 	</div>

@@ -76,7 +76,7 @@ function WatchStreams() {
 		urlParams.append(platform, stream)
 	}
 
-	window.location.href = 'live?' + urlParams.toString() + ($("#switch-box")[0].checked ? "&inv" : "")
+	window.location.href = 'live?' + urlParams.toString() + ($("#switch-box")[0].checked ? "&inv" : "") + ($("#horizontal-box")[0].checked ? "&hor" : "")
 }
 
 window.onload = function() {

@@ -1,5 +1,13 @@
 availablePlayers = ['tw', 'yt']
 
+Element.prototype.appendBefore = function(element) {
+	element.parentNode.insertBefore(this, element);
+};
+Element.prototype.appendAfter = function(element) {
+	element.parentNode.insertBefore(this, element.nextSibling);
+};
+
+
 function CalculateScreenPercentages(queryStr) {
 	screenSplit = 0
 	for (const [key, value] of queryStr) {
@@ -9,6 +17,24 @@ function CalculateScreenPercentages(queryStr) {
 		}
 	}
 	return ((1 / screenSplit * 100)) + "%"
+}
+
+function SwitchToHorizontal(queryStr) {
+	players = $(".player")
+	chats = $(".chat")
+	for (var i = 0; i < chats.length; i++) {
+
+		if (!queryStr.has('inv')) {
+			chats[i].appendAfter(players[i])
+		} else {
+			chats[i].appendBefore(players[i])
+		}
+
+		chats[i].style.width = players[i].style.width = "50%";
+		chats[i].style.height = players[i].style.height = CalculateScreenPercentages(queryStr)
+	}
+
+	$('#players')[0].style.height = "100%";
 }
 
 function InitializeTwitchEmbeds(twitchChannel, queryStr) {
@@ -60,8 +86,8 @@ function ParseChannelOptions() {
 
 				const [videoFrame, chatFrame] = InitializeTwitchEmbeds(twitchChannel, queryStr)
 
-				document.getElementById('players').appendChild(videoFrame)
-				document.getElementById('chats').appendChild(chatFrame)
+				$('#players')[0].appendChild(videoFrame)
+				$('#chats')[0].appendChild(chatFrame)
 			}
 		} else if (key == 'yt') {
 			youtubeStreams = value.split(",")
@@ -71,8 +97,8 @@ function ParseChannelOptions() {
 
 				const [videoFrame, chatFrame] = InitializeYoutubeEmbeds(ytID, queryStr)
 
-				document.getElementById('players').appendChild(videoFrame)
-				document.getElementById('chats').appendChild(chatFrame)
+				$('#players')[0].appendChild(videoFrame)
+				$('#chats')[0].appendChild(chatFrame)
 			}
 		}
 	}
@@ -82,16 +108,23 @@ function ParseChannelOptions() {
 		document.location.pathname = document.location.pathname.substr(0, document.location.pathname.lastIndexOf('/'))
 	}
 
-	document.getElementById('players').style.width = document.getElementById('chats').style.width = "100%"
+	$('#players')[0].style.width = $('#chats')[0].style.width = "100%"
 }
+
 
 window.onload = function() {
 	pageHeight = Math.max($(document).height(), $(window).height())
 	ParseChannelOptions();
 
 	const queryStr = new URLSearchParams(window.location.search);
-	if (queryStr.has('inv')) {
-		$("#players").insertAfter("#chats"); // Reordering the divs flips them
+
+	if (queryStr.has('inv') && !queryStr.has('hor')) {
+		$("#players").insertAfter("#chats"); // Reordering the divs flips them when in vertical
 	}
 
+	if (queryStr.has('hor')) {
+		console.log("Switching to horizontal mode...");
+		// Handle a horizontal layout instead
+		SwitchToHorizontal(queryStr);
+	}
 }

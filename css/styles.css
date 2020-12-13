@@ -28,3 +28,11 @@ html, body {
 .chat {
 	height: 100%;
 }
+
+
+/* Horizontal Layout */
+
+.horizontal {
+	height: 50%;
+	width: 100%;
+}
