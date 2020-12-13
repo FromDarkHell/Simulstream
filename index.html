@@ -46,11 +46,27 @@
 		</div>
 		
 		<button id="add-button" type="button" onclick="AddStream()">Add Stream</button>
+		
 		<br>
 		<button id="clear-button" type="button" onclick="ClearStreams()">Clear Stream List</button>
 		<br>
 		
 		<button id="watch-button" type="button" onclick="WatchStreams()">Watch Streams</button>
+		<br>
+		
+		<div id="layout-div">
+			Layout Options
+		</div>
+		
+		<span id="switch-span" title="Switches the location of the stream & chat">
+			<input type="checkbox" id="switch-box">
+			<label>Switch Streams and Chat</label>
+		</span>
+		<br>
+		<span id="align-span" title="Default: Stream on left, chat on right">
+			<input type="checkbox" id="align-box">
+			<label>Horizontal Layout</label>
+		</span>
 	</div>
 	
 	<footer id="footer">

@@ -55,7 +55,6 @@ input {
 	text-decoration: underline;
 }
 
-
 #clear-button {
 	position: relative;
 
@@ -94,6 +93,32 @@ button[disabled=disabled], button:disabled {
   background-color: #ddd !important;
   background: #ddd !important;
   text-decoration: line-through !important;
+}
+
+#layout-div {
+	margin-top: 2.5vh;
+
+	text-align: center;
+	text-decoration: underline;
+}
+
+
+#switch-span {
+	display: inline-block;
+	position: relative;
+
+	padding: 5px;
+	margin-top: 1.5vh;
+	left: calc(41% - 5px);
+}
+
+#align-span {
+	display: inline-block;
+	position: relative;
+	
+	padding: 5px;
+	margin-top: 1.5vh;
+	left: calc(41% - 5px);
 }
 
 /* Footer */

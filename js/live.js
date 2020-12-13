@@ -1,6 +1,13 @@
-function CalculateScreenPercentages(queryStr) {
-	screenSplit = Array.from(queryStr).length;
+availablePlayers = ['tw', 'yt']
 
+function CalculateScreenPercentages(queryStr) {
+	screenSplit = 0
+	for (const [key, value] of queryStr) {
+		if (availablePlayers.indexOf(key) > -1) {
+			channels = value.split(",")
+			screenSplit += channels.length;
+		}
+	}
 	return ((1 / screenSplit * 100)) + "%"
 }
 
@@ -81,4 +88,10 @@ function ParseChannelOptions() {
 window.onload = function() {
 	pageHeight = Math.max($(document).height(), $(window).height())
 	ParseChannelOptions();
+
+	const queryStr = new URLSearchParams(window.location.search);
+	if (queryStr.has('inv')) {
+		$("#players").insertAfter("#chats"); // Reordering the divs flips them
+	}
+
 }
