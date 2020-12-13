@@ -32,22 +32,6 @@ input {
 }
 
 
-/*
-
-#twitch-input {
-	position: relative;
-	left: 5%;
-	margin-right: 5px;
-	width: 40%;
-}
-
-#yt-input {
-	position: relative;
-	left: 15%;
-	width: 40%;
-}
-*/
-
 #twitch-input {
 	position: relative;
 	margin-right: 5px;
@@ -103,6 +87,14 @@ input {
 	text-decoration: underline;
 }
 
+button[disabled=disabled], button:disabled {
+  border: 2px outset ButtonFace !important;
+  color: GrayText !important;
+  cursor: inherit;
+  background-color: #ddd !important;
+  background: #ddd !important;
+  text-decoration: line-through !important;
+}
 
 /* Footer */
 #footer {

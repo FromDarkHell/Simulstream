@@ -17,8 +17,10 @@ function IsValidURL(string) {
 function UpdateStreamsList() {
 	if (CurrentStreams !== null) {
 		$("#StreamText")[0].textContent = CurrentStreams.join(', ')
+		$("#watch-button")[0].disabled = '';
 	} else {
 		$("#StreamText")[0].textContent = 'None'
+		$("#watch-button")[0].disabled = 'disabled';
 	}
 }
 
@@ -26,6 +28,9 @@ function AddStream() {
 	if (CurrentStreams === null) CurrentStreams = []
 
 	streamLink = $("#twitch-input")[0].value
+	if (streamLink == "" || $.trim(streamLink) == "") {
+		return;
+	}
 	console.log("Adding stream: " + streamLink)
 
 	displayName = streamLink
@@ -72,4 +77,15 @@ function WatchStreams() {
 	}
 
 	window.location.href = 'live?' + urlParams.toString()
+}
+
+window.onload = function() {
+	$("#twitch-input")[0].addEventListener("keyup", function(evt) {
+		if (evt.keyCode === 13) {
+			evt.preventDefault();
+			$("#add-button")[0].click();
+		}
+	});
+
+	UpdateStreamsList();
 }

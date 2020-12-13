@@ -70,12 +70,10 @@ function ParseChannelOptions() {
 		}
 	}
 
-	/*
-	if (!queryStr.has('yt')) {
+	if (!queryStr.has('yt') && !queryStr.has('tw')) {
 		window.location.search = ""
 		document.location.pathname = document.location.pathname.substr(0, document.location.pathname.lastIndexOf('/'))
 	}
-	*/
 
 	document.getElementById('players').style.width = document.getElementById('chats').style.width = "100%"
 }
